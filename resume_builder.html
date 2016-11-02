@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+<script src="angular.js"></script>
+<link rel="stylesheet" type="stylesheet/css" href="stylesheet.css">
+<style>
+.form-control1 {
+  position: absolute;
+  top: 919px;
+  left: 600px;
+  width: 1330px;
+  height: 250px;
+}
+
+.form-control2 {
+  position: absolute;
+  top: 1302px;
+  left: 600px;
+  width: 1330px;
+  height: 250px;
+}
+
+.form-control3 {
+  position: absolute;
+  top: 1688px;
+  left: 600px;
+  width: 1330px;
+  height: 250px;
+}
+
+.form-control4 {
+  position: absolute;
+  top: 2125px;
+  left: 600px;
+  width: 1330px;
+  height: 250px;
+}
+
+.rate-button {
+  background-color: #ABCDEF;
+  border: 5px solid blue;
+  font-size: 16px;
+  position: absolute;
+  top: 2500px;
+  left: 600px;
+  width: 200px;
+  height: 50px;
+}
+</style>
+
+<title>Appdesign</title>
+
+  <body ng-app="myapp" bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+  <img src="http://i.imgur.com/iklXXDz.gif" width="2000px" height="3000px" alt="Image not loaded">
+    <!-- Save for Web Slices (Appdesign.html) -->
+    <div ng-controller="myctrl">
+      <label form="info"></label>
+      <textarea class="form-control1" ng-model="name" placeholder = "Please insert data related to common info like name, address, email id and phone number" rows="5" id="info"></textarea>
+    </div>
+
+    <div ng-controller="myctrl1">
+      <label form="education"></label>
+      <textarea ng-model="education" class="form-control2" rows="5" placeholder = "Please insert data related to your college/ university, GPA and currently taken courses" id="education"></textarea>
+      <button ng-click="showRecords()"> Submit</button>
+      <p ng-repeat="x in list">{{x}}</p>
+    </div>
+
+    <div ng-controller="myctrl2">
+      <label for="achievements"></label>
+      <form >
+        <textarea  class="form-control3" placeholder = "Please insert your work experience and your quantifiable achievements in terms of what you have done for the company you have worked for." rows="5" id="achievements">
+          
+        </textarea>
+    </div>
+
+    <div ng-controller="myctrl3">
+      <label for="projects"></label>
+      <textarea class= "form-control4" placeholder = "Please mention the projects in which you have contributed." rows="5" id="projects"></textarea>
+    </div>
+
+
+    <div ng-controller="myctrl4" >
+      <button ng-click="redirectToPage()" ng-model="data = myFunction()" class ="rate-button">Rate your resume</button>
+    </div>
+    <!-- End Save for Web Slices -->
+  </body>
+</title>
+
+<script>
+var rating = 100;
+
+
+var alldata=[];
+
+function myFunction() {
+
+  var myWindow = window.open("", "MsgWindow", "width=200,height=100");
+  myWindow.document.write('<body><img src="http://i.imgur.com/BvB959w.gif" width="2000px" height="3000px" alt="Image not loaded"></body>');
+  var education = document.getElementById("education");
+  var firstarray = education.value.split("\n");
+
+
+  var check_it = firstarray[1];
+  if (check_it>3.0 && check_it < 3.5){
+    rating -= 5;
+    var a1 = "5% of your resume points are deducted because your GPA is less than 3.5";
+    alldata.push(a1);
+  }
+  else if (check_it < 3.0){
+
+    rating -= 10;
+    var a1 = "10% of your resume points are deducted because your GPA is less than 3.0";
+    alldata.push(a1);
+  }
+  
+
+  var achievements = document.getElementById("achievements");
+  var secondarrays = achievements.value.split(" ");
+  var count_percent = 0;
+  var count_num = 0;
+  for (var each_word in secondarrays ) {
+
+    if (!isNaN(secondarrays[each_word])){
+
+      count_num += 1;
+
+    }
+
+    if (secondarrays[each_word] === "%"){
+      
+      count_percent = count_percent + 1;
+    }
+  }
+  if (count_num < 1){
+    var a3 = "</p>The achievement portion of the resume should be quantifiable. So, please include the increase in the revenue because of your work on behalf of the company. 10% is deducted off the resume points as a result. </p>";
+    alldata.push(a3);
+
+    rating -=10;
+  }
+  if (count_percent < 1){
+    var a4 = "<p>The achievement portion of the resume should be quantifiable. So, please include the increase in terms of % because of your work on behalf of the company. 10% is deducted off the resume points as a result.</p>";
+    rating -= 10;
+    alldata.push(a4);
+  }
+  
+
+  var projects = document.getElementById("projects");
+  var thirdarrays = projects.value.split("\n");
+
+  if (thirdarrays.length === 1) {
+    rating -= 20;
+  }
+  alldata.push(rating);
+  return{
+    alldata;
+  }
+};
+</script>
+

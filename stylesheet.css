@@ -1,0 +1,42 @@
+.form-control1 {
+	position: absolute;
+	top: 919px;
+	left: 600px;
+	width: 1330px;
+	height: 250px;
+}
+
+.form-control2 {
+	position: absolute;
+	top: 1302px;
+	left: 600px;
+	width: 1330px;
+	height: 250px;
+}
+
+.form-control3 {
+	position: absolute;
+	top: 1688px;
+	left: 600px;
+	width: 1330px;
+	height: 250px;
+}
+
+.form-control4 {
+	position: absolute;
+	top: 2125px;
+	left: 600px;
+	width: 1330px;
+	height: 250px;
+}
+
+.rate-button {
+	background-color: #ABCDEF;
+	border: 5px solid blue;
+	font-size: 16px;
+	position: absolute;
+	top: 2500px;
+	left: 600px;
+	width: 200px;
+	height: 50px;
+}
